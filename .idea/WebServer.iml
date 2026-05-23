@@ -147,6 +147,9 @@
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/web-auth/cose-lib" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/web-auth/webauthn-lib" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/storage/app" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/storage/debugbar" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/storage/framework" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
