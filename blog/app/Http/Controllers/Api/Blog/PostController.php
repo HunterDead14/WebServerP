@@ -46,6 +46,14 @@ class PostController extends BaseController{
      */
     public function destroy(string $id)
     {
-        //
+        $result = BlogPost::destroy($id); //софт деліт, запис лишається
+
+        //$result = BlogPost::find($id)->forceDelete(); //повне видалення з БД
+
+        if ($result) {
+            return ['success'=>true, 'message'=>'Статтю видалено']; //TODO: Написати код респонса
+        } else {
+            return ['success'=>false, 'message'=>'Помилка видалення']; //TODO: Написати код респонса
+        }
     }
 }
