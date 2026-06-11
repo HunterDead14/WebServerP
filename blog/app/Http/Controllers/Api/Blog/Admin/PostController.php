@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Blog\Admin;
 use App\Repositories\BlogPostRepository;
 use App\Repositories\BlogCategoryRepository;
 use App\Http\Requests\BlogPostUpdateRequest;
+use App\Http\Resources\Api\Blog\Admin\PostResource;
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
 use App\Http\Requests\BlogPostCreateRequest;
@@ -34,7 +35,7 @@ class PostController extends BaseController
     {
         $paginator = $this->blogPostRepository->getAllWithPaginate();
 
-        return $paginator;
+        return PostResource::collection($paginator);
     }
 
     /**
@@ -60,10 +61,9 @@ class PostController extends BaseController
      */
     public function show(string $id)
     {
-        $item = BlogPost::with(['user', 'category'])->findOrFail($id);
+        $item = \App\Models\BlogPost::with(['user', 'category'])->findOrFail($id);
 
-        // Віддаємо готовий результат на фронтенд (в Nuxt)
-        return response()->json(['data' => $item]);
+        return new PostResource($item);
     }
 
     /**
