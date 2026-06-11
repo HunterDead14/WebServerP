@@ -8,7 +8,7 @@ class GeneratePointsJob extends AbstractJob
 
     public function handle()
     {
-        $f = 1 / 0;
+       // $f = 1 / 0;
 
         parent::handle();
     }

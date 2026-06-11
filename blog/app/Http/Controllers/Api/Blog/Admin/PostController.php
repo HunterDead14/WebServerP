@@ -60,7 +60,10 @@ class PostController extends BaseController
      */
     public function show(string $id)
     {
-        //
+        $item = BlogPost::with(['user', 'category'])->findOrFail($id);
+
+        // Віддаємо готовий результат на фронтенд (в Nuxt)
+        return response()->json(['data' => $item]);
     }
 
     /**
