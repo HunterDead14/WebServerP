@@ -54,7 +54,8 @@ class CategoryController extends BaseController{
      */
     public function show(string $id)
     {
-        //dd(__METHOD__);
+        $item = \App\Models\BlogCategory::findOrFail($id);
+        return new \App\Http\Resources\Api\Blog\Admin\CategoryResource($item);
     }
 
     /**
@@ -90,6 +91,21 @@ class CategoryController extends BaseController{
      */
     public function destroy(string $id)
     {
-        //dd(__METHOD__);
+        $item = BlogCategory::find($id);
+
+        if (empty($item)) {
+            return response()->json(['message' => "Запис id=[{$id}] не знайдено"], 404);
+        }
+
+        $result = $item->delete();
+
+        if ($result) {
+            return [
+                'success' => true,
+                'message' => 'Успішно видалено'
+            ];
+        } else {
+            return response()->json(['message' => 'Помилка видалення'], 500);
+        }
     }
 }
