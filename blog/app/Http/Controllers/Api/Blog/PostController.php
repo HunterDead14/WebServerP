@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Blog;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
+use App\Http\Resources\Api\Blog\Admin\PostResource;
+
 class PostController extends BaseController{
     /**
      * Display a listing of the resource.
@@ -30,7 +32,9 @@ class PostController extends BaseController{
      */
     public function show(string $id)
     {
-        //
+        $item = BlogPost::where('is_published', true)->findOrFail($id);
+
+        return new PostResource($item);
     }
 
     /**
@@ -46,14 +50,6 @@ class PostController extends BaseController{
      */
     public function destroy(string $id)
     {
-        $result = BlogPost::destroy($id); //софт деліт, запис лишається
 
-        //$result = BlogPost::find($id)->forceDelete(); //повне видалення з БД
-
-        if ($result) {
-            return ['success'=>true, 'message'=>'Статтю видалено']; //TODO: Написати код респонса
-        } else {
-            return ['success'=>false, 'message'=>'Помилка видалення']; //TODO: Написати код респонса
-        }
     }
 }
